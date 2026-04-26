@@ -1,0 +1,53 @@
+{% if not data or data.status == "starting" %}
+
+    <p>🚀 Starting download...</p>
+
+{% elif data.error %}
+
+    <p style="color:red;">Error: {{ data.error }}</p>
+
+{% elif data.status == "finished" %}
+
+    <div style="text-align:center;">
+        <h3>✅ Download complete!</h3>
+
+        {% if file_ready %}
+            <a href="/download/{{ job_id }}/">
+                <button style="
+                    background:#28a745;
+                    color:white;
+                    padding:12px 20px;
+                    border:none;
+                    border-radius:8px;
+                    cursor:pointer;
+                ">
+                    Download File
+                </button>
+            </a>
+        {% endif %}
+    </div>
+
+{% else %}
+
+    <div style="background:#eee;border-radius:10px;overflow:hidden;height:25px;">
+
+    <div style="
+        width: {{ data.percent|default:0 }}%;
+        background:#28a745;
+        height:100%;
+        color:white;
+        text-align:center;
+        transition: width 0.3s ease;
+        min-width: 2%;
+    ">
+        {{ data.percent|default:0 }}%
+    </div>
+
+</div>
+
+    <p style="margin-top:10px;">
+        ⚡ Speed: {{ data.speed|default:"--" }}
+        | ⏳ ETA: {{ data.eta|default:"--" }}
+    </p>
+
+{% endif %}
