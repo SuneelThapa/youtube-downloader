@@ -1,2 +1,5 @@
 venv\Scripts\activate
 python manage.py runserver 8009 or 8008 or any number
+
+git restore . — discards changes to modified files
+git clean -fd — deletes untracked files like jobs.py, queue.py, queue.html
